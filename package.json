@@ -1,0 +1,15 @@
+{
+  "name": "test_fb_video_upload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "author": "KT",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
