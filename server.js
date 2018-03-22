@@ -3,7 +3,6 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 const graph = require('fbgraph');
-const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const errorHandler = require('errorhandler');
 const redirect_uri = "https://localhost:8080/auth";
@@ -56,11 +55,13 @@ function setupServer() {
     app.post('/uploadVideo', bodyParser.json(), function(req, res) {
         if(req.body) {
             console.log(req.body);
+            res.status(200).end();
         }
         else {
             console.log('no json data for uploadVideo route');
+            res.status(400).end();
         }
-        res.status(200).end();
+        
     });
 
     /*
