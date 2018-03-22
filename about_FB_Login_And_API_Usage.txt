@@ -7,17 +7,6 @@ a.當用戶按下"登入FB"的按鈕時,客戶端應用會自動跳出官方提�
 b.當用戶輸入帳號密碼登入，並同意我們所要求的權限時，在客戶端這邊可以拿到用戶同意我們代他執行特定動作的權杖(token) ,
 細部的用戶操作結果可以用API帶回來的結果作判斷(請參考:https://developers.facebook.com/docs/facebook-login/web#checklogin)
 
-How to setup https in simple way:
-1. setup stunnel as reverse proxy.
-one can install it from the url below
-https://www.stunnel.org/downloads.html
-2. add the following lines to configuration file(click Configuration > Edit Configuration from the menu)
-[tls]
-accept=0.0.0.0:8080
-connect=127.0.0.1:3000
-cert = stunnel.pem
-3. click Configuration > Reload Configuration from the menu
-
 References:
 Node FB API:
 1. https://github.com/criso/fbgraph
