@@ -1,0 +1,29 @@
+登入流程大致上可分為兩種，適用的情境不太一樣
+1. 使用官方提供的client-side SDK，這樣的好處是可以簡化實作細節，提供與官方一致的UI樣貌與互動體驗(登入按鈕 登入對話框等等的)
+大致上的流程:(以下以web app或browser的流程做說明)
+a.當用戶按下"登入FB"的按鈕時,客戶端應用會自動跳出官方提供的登入對話框(細部客製化可參考:https://developers.facebook.com/docs/facebook-login/web#checklogin 比如說根據用戶登入狀態去設定按鈕的樣貌)
+    * 如何設計登入按鈕:https://developers.facebook.com/docs/facebook-login/web#loginbutton
+    * 如何用自己設計的按鈕去觸發跳出對話框的邏輯:https://developers.facebook.com/docs/reference/javascript/FB.login/
+b.當用戶輸入帳號密碼登入，並同意我們所要求的權限時，在客戶端這邊可以拿到用戶同意我們代他執行特定動作的權杖(token) ,
+細部的用戶操作結果可以用API帶回來的結果作判斷(請參考:https://developers.facebook.com/docs/facebook-login/web#checklogin)
+
+How to setup https in simple way:
+1. setup stunnel as reverse proxy.
+one can install it from the url below
+https://www.stunnel.org/downloads.html
+2. add the following lines to configuration file(click Configuration > Edit Configuration from the menu)
+[tls]
+accept=0.0.0.0:8080
+connect=127.0.0.1:3000
+cert = stunnel.pem
+3. click Configuration > Reload Configuration from the menu
+
+References:
+Node FB API:
+1. https://github.com/criso/fbgraph
+2. https://github.com/node-facebook/facebook-node-sdk
+
+DoT Engine:
+http://olado.github.io/doT/index.html
+https://www.npmjs.com/package/express-dot-engine
+
