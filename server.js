@@ -27,10 +27,6 @@ var engine = require('express-dot-engine');
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'dot');
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(methodOverride());
 var env = process.env.NODE_ENV || 'development';
 if ('development' == env) {
    app.use(errorHandler({ dumpExceptions: true, showStack: true }));
@@ -39,7 +35,6 @@ if ('development' == env) {
 
 function setupServer() {
     const fbConfig = require('./fbConfig');
-
 
     //routes
     app.get('/FBLoginTest', function(req, res) {
@@ -56,6 +51,16 @@ function setupServer() {
             "api_version": fbConfig.api_version,
             "fb_api_scope": fbConfig.scope
         });
+    });
+
+    app.post('/uploadVideo', bodyParser.json(), function(req, res) {
+        if(req.body) {
+            console.log(req.body);
+        }
+        else {
+            console.log('no json data for uploadVideo route');
+        }
+        res.status(200).end();
     });
 
     /*

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html ng-app="mainApp">
 <head>
-<title>Facebook Login JavaScript Example</title>
+<title>Facebook Upload Test</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/public/fb_button.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+<script src="https://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
 <script src="/public/app.js"></script>
 <script>
   var model = [[= JSON.stringify(model) ]];
 </script>
 </head>
-<body ng-controller="FBTestController as ctrler" ng-init="ctrler.fbInit()">
+<body ng-controller="FBTestController as ctrler">
 
-<button class="loginBtn loginBtn--facebook"  ng-click="ctrler.fbBtnOnPress()">{{ctrler.fbBtnLabel}}</button>
+<button class="loginBtn loginBtn--facebook"  ng-click="ctrler.fbBtnOnPress()">
+分享照片
+</button>
 
 </body>
 </html>
