@@ -62,9 +62,9 @@ if all setup were correctly done, then it should look like the image below
 
 ## 2. 填入必要事項
 ![image2](https://marunouchi-tech.i-studio.co.jp/wp-content/uploads/2017/03/blog2-300x186.png)  
-選擇「基礎設定」→ 輸入「隱私權政策的URL」、設定「應用程式圖示」
+選擇「基礎設定」→ 輸入「隱私權政策的URL」、設定「應用程式圖示」
 
-選擇在「基礎設定」頁面下面的「追加平台」→ 選擇「網站」→ 輸入「網站URL」  
+選擇在「基礎設定」頁面下面的「追加平台」→ 選擇「網站」→ 輸入「網站URL」  
 
 ![image2.5](https://github.com/gary9716/TestFBVideoUpload/blob/master/add_scope_item.PNG)  
 選擇「應用程式審查」→ 點選 提交項目以進行批准的「開始提交」→在「publish_actions」打勾後 點選「Add 1 item」
