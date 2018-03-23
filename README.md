@@ -35,9 +35,10 @@ npm install
 ```
 node server.js
 ```
-4. for testing whether FB login feature works or not, one can access the following url https://localhost:8080/FBLoginTest
-if all setup were correctly done, then it should look like the image below
-![fb_login_test](https://github.com/gary9716/TestFBVideoUpload/blob/master/FBLoginTestView.PNG)
+4. first time you run the server, it would generate the configuration file(fbConfig.js). please fill in corresponding data before running the server again.
+
+5. all implemented features can be accessed from https://localhost:8080/
+
 
 # 關於在FB APP上申請投稿權限（publish_actions）的步驟
 文章來源:https://marunouchi-tech.i-studio.co.jp/3618/
