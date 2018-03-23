@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Facebook Login JavaScript Example</title>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<ul>
+[[~model.urls:value:index]]
+<li><a href="[[=value.url]]">[[=value.label]]</a></li>
+[[~]]
+</ul>
+
+</body>
+</html>

@@ -22,7 +22,7 @@
                 if(response.authResponse) {
                     // Logged into your app and Facebook.
                     var userData = response.authResponse;
-                    $http.post('/uploadVideo', userData)
+                    $http.post('/postToWall', userData)
                     .then(function(res) {
                         console.log('succeed to pass data');
                     })

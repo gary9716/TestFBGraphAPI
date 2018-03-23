@@ -14,7 +14,7 @@
 <body ng-controller="FBTestController as ctrler">
 
 <button class="loginBtn loginBtn--facebook"  ng-click="ctrler.fbBtnOnPress()">
-分享照片
+[[=model.action_btn_label]]
 </button>
 
 </body>

@@ -36,6 +36,25 @@ function setupServer() {
     const fbConfig = require('./fbConfig');
 
     //routes
+    app.get('/', function(req, res) {
+        res.render('index', {
+            urls: [
+                {
+                    url: '/FBLoginTest',
+                    label: 'login test'
+                },
+                {
+                    url: '/FBPostTest',
+                    label: 'post test'
+                },
+                {
+                    url: '/FBUploadVideoTest',
+                    label: 'upload video test'
+                }
+            ]
+        });
+    });
+
     app.get('/FBLoginTest', function(req, res) {
         res.render('loginExample', { 
             "app_id": fbConfig.app_id, 
@@ -44,22 +63,90 @@ function setupServer() {
         });
     });
 
-    app.get('/FBUploadTest', function(req, res) {
+    app.get('/FBPostTest', function(req, res) {
         res.render('uploadTest', { 
             "app_id": fbConfig.app_id, 
             "api_version": fbConfig.api_version,
-            "fb_api_scope": fbConfig.scope
+            "fb_api_scope": fbConfig.scope,
+            "action_btn_label": "貼文測試",
         });
+    });
+
+    app.get('/FBUploadVideoTest', function(req, res) {
+        res.render('uploadTest', { 
+            "app_id": fbConfig.app_id, 
+            "api_version": fbConfig.api_version,
+            "fb_api_scope": fbConfig.scope,
+            "action_btn_label": "分享影片",
+        });
+    });
+
+    app.post('/postToWall', bodyParser.json(), function(req, res) {
+        if(req.body) {
+            //req.body should be a json with following structure:
+             /*
+                authResponse: {
+                    accessToken: '...',
+                    expiresIn:'...',
+                    signedRequest:'...',
+                    userID:'...'
+                }
+                如果狀態是 connected，就會包含 authResponse，且由以下資料所構成：
+                accessToken - 含有這位應用程式用戶的存取權杖。
+                expiresIn - 以 UNIX 時間顯示權杖何時到期並需要再次更新。
+                signedRequest - 已簽署的參數，其中包含這位應用程式用戶的資訊。
+                userID - 這位應用程式用戶的編號。
+            */
+
+            graph.setAccessToken(req.body.accessToken);
+            var wallPost = {
+                message: 'an post test from my node server via graph api'
+            };
+
+            graph.post("/feed", wallPost, function(err, fbRes) {
+                if(err)  
+                    res.status(400).send(err);
+                else {    
+                    // returns the post id
+                    console.log("post succeed, post id:" + fbRes.id); // { id: xxxxx}
+                    res.status(200).end();
+                }
+            });
+
+        }
+        else {
+            var errorMsg = 'no json data for uploadVideo route';
+            console.log();
+            res.status(400).send(errorMsg);
+        }
     });
 
     app.post('/uploadVideo', bodyParser.json(), function(req, res) {
         if(req.body) {
             console.log(req.body);
+            //req.body should be a json with following structure:
+             /*
+                authResponse: {
+                    accessToken: '...',
+                    expiresIn:'...',
+                    signedRequest:'...',
+                    userID:'...'
+                }
+                如果狀態是 connected，就會包含 authResponse，且由以下資料所構成：
+                accessToken - 含有這位應用程式用戶的存取權杖。
+                expiresIn - 以 UNIX 時間顯示權杖何時到期並需要再次更新。
+                signedRequest - 已簽署的參數，其中包含這位應用程式用戶的資訊。
+                userID - 這位應用程式用戶的編號。
+            */
+            graph.setAccessToken(req.body.accessToken);
+            
+
             res.status(200).end();
         }
         else {
-            console.log('no json data for uploadVideo route');
-            res.status(400).end();
+            var errorMsg = 'no json data for uploadVideo route';
+            console.log();
+            res.status(400).send(errorMsg);
         }
         
     });
