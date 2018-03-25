@@ -8,7 +8,6 @@ const FB = require('fb');
 
 const bodyParser = require('body-parser');
 const errorHandler = require('errorhandler');
-const redirect_uri = "https://localhost:8080/auth";
 
 if(!fs.existsSync('./fbConfig.js')) {
     const configGenerate = require('./fbConfigGenerator');
@@ -20,22 +19,21 @@ else {
     setupServer();
 }
 
-
-//setup middleware
-app.use('/public', express.static(__dirname + '/public'));
-
-//use DoT as server-side rendering engine
-var engine = require('express-dot-engine');
-app.engine('dot', engine.__express);
-app.set('views', path.join(__dirname, './views'));
-app.set('view engine', 'dot');
-var env = process.env.NODE_ENV || 'development';
-if ('development' == env) {
-   app.use(errorHandler({ dumpExceptions: true, showStack: true }));
-}
-
 function setupServer() {
     const fbConfig = require('./fbConfig');
+
+    //setup middleware
+    app.use('/public', express.static(__dirname + '/public'));
+
+    //use DoT as server-side rendering engine
+    var engine = require('express-dot-engine');
+    app.engine('dot', engine.__express);
+    app.set('views', path.join(__dirname, './views'));
+    app.set('view engine', 'dot');
+    var env = process.env.NODE_ENV || 'development';
+    if ('development' == env) {
+       app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+    }
 
     FB.options({version: fbConfig.api_version});
 
@@ -133,7 +131,8 @@ function setupServer() {
                 }
             }
         ];
-        
+
+        //method definitions-----
         //for more details about the parameters of feed posting, please refer to: https://developers.facebook.com/docs/graph-api/reference/v2.12/user/feed#publish
         var doFeedPostTest1 = function(authResponse) {
             //via this SDK: https://github.com/node-facebook/facebook-node-sdk
@@ -170,6 +169,7 @@ function setupServer() {
             });
 
         }
+        //method definitions-----
 
         if(req.body) {
             doFeedPostTest2(req.body);
@@ -183,7 +183,7 @@ function setupServer() {
 
 
     app.post('/uploadVideo', bodyParser.json(), function(req, res) {
-        
+        //method definitions-----
         var doVideoUploadTest1 = function(authResponse) {
             //via this SDK: https://github.com/node-facebook/facebook-node-sdk
 
@@ -212,36 +212,10 @@ function setupServer() {
                 }
             });
         }
-
-        var doVideoUploadTest2 = function(authResponse) {
-            //via this SDK: https://github.com/criso/fbgraph
-
-            graph.setAccessToken(authResponse.accessToken);
-            var videoData = {
-                source: fs.createReadStream(__dirname + '/videos/testVideo.mov'),
-                description: 'a test video for testing video uploading',
-                title: 'My Test Video',
-                privacy: {
-                    value: 'SELF' //this value can be one of {'EVERYONE', 'ALL_FRIENDS', 'FRIENDS_OF_FRIENDS', 'CUSTOM', 'SELF'}. For more details, please refer to https://developers.facebook.com/docs/graph-api/common-scenarios#privacy-param
-                },
-                is_explicit_share: true
-            };
-
-            //for more details about video publishing(such as parameters), please refer to https://developers.facebook.com/docs/graph-api/reference/video/
-            
-            graph.post("me/videos", videoData, function(err, fbRes) {
-                if(err)  
-                    res.status(400).send(err);
-                else {    
-                    // returns the post id
-                    console.log("video post succeed, post id:" + fbRes.id); // { id: xxxxx}
-                    res.status(200).end();
-                }
-            });
-        }
+        //method definitions-----
 
         if(req.body) {
-            doVideoUploadTest2(req.body);
+            doVideoUploadTest1(req.body);
         }
         else {
             var errorMsg = 'no json data for uploadVideo route';
